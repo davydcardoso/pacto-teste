@@ -31,7 +31,7 @@ public class SubscriptionVacanciesController {
     private CancelApplicationForJobVacancyUseCase cancelApplicationForJobVacancyUseCase;
 
     @GetMapping("/competitors")
-    public ResponseEntity getCompetitors(@RequestParam("id") String vacancyId, @RequestHeader HashMap<String, String> headers) {
+    public ResponseEntity getCompetitors(@RequestHeader HashMap<String, String> headers) {
         try {
             return ResponseEntity.ok().body(this.consultVacanciesAndCandidatesUseCase.perform());
         }catch (Exception exception) {

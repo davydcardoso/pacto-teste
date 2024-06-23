@@ -8,6 +8,7 @@ import br.com.pacto.teste_backend.modules.vacancies.infra.repositories.Vacancies
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,6 +30,14 @@ public class ApplyForVacancyUseCase {
 
         if (existVacancy.isEmpty()) {
             throw new RuntimeException("Não foi possivel localizar a vaga de emprego informada");
+        }
+
+        List<Users> usersInVacancy = existVacancy.get().getUsers();
+
+        for (Users userItem: usersInVacancy) {
+            if (userItem.getId() == user.getId()) {
+                throw new RuntimeException("Você já se inscreveu pra essa vaga de emprego");
+            }
         }
 
         existVacancy.get().getUsers().add(user);

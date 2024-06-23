@@ -1,0 +1,41 @@
+<div class="w-[100%] h-[60px] bg-primary flex items-center justify-center">
+  <div class="w-[80%] h-[100%] flex items-center justify-between">
+    <h1 class="text-white uppercase font-bold text-2xl">PACTO</h1>
+
+    <span class="text-white text-[14px] font-semibold">
+      Olá, {{ userName }}
+    </span>
+
+    <nav class="text-white uppercase text-[14px] font-semibold">
+      <ul class="flex items-center gap-4">
+        <li class="hover:cursor-pointer">
+          <a href="/vacacies" target="_self">Inicio</a>
+        </li>
+        <li class="hover:cursor-pointer">
+          <a href="/vacacies" target="_self">Minha Conta</a>
+        </li>
+        <li class="hover:cursor-pointer">
+          <a href="/vacacies" target="_self">Minhas Inscrições</a>
+        </li>
+        <li class="hover:cursor-pointer">
+          <a
+            href="/admin"
+            target="_self"
+            class="w-[150px] h-[40px] border-solid border-white border-[0.5px] px-5 py-1 rounded-full hover:bg-[#fdfdfd53] ease-in-out duration-100"
+          >
+            Admin
+          </a>
+        </li>
+
+        <li class="hover:cursor-pointer">
+          <a
+            (click)="handleLogOff()"
+            class="w-[150px] h-[40px] border-solid border-white border-[0.5px] px-5 py-1 rounded-full hover:bg-[#fdfdfd53] ease-in-out duration-100"
+          >
+            Encerrar
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
