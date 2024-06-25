@@ -1,0 +1,58 @@
+<div
+  class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-screen w-full flex items-center"
+  *ngIf="isVisible"
+>
+  <div
+    class="w-[700px] relative mx-auto p-5 border shadow-lg rounded-md bg-white"
+  >
+    <div class="mt-3 text-center">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        Candidatos da Vaga
+      </h3>
+      <div class="w-[100%] h-[500px] mt-2 px-7 py-3">
+        <div class="row">
+          <div class="column">
+            <table
+              class="min-w-full bg-white border-gray-200 shadow-md rounded-lg overflow-hidden"
+            >
+              <thead class="bg-gray-100 text-gray-800 uppercase">
+                <tr>
+                  <th class="py-3 px-6 text-left">Titulo</th>
+                  <th class="py-3 px-6 text-left">Descrição</th>
+                  <th class="py-3 px-6 text-center">Curriculo</th>
+                  <!-- <th class="py-3 px-6 text-center">Ações</th> -->
+                </tr>
+              </thead>
+
+              <tbody class="text-gray-700">
+                <tr
+                  *ngFor="let user of competitors"
+                  class="items-center justify-center border-b border-gray-200 hover:bg-gray-50"
+                >
+                  <td class="py-4 px-6">{{ user.name }}</td>
+                  <td class="py-4 px-6">{{ user.email }}</td>
+                  <td class="py-4 px-6">
+                    <button
+                      class="inline-flex hover:cursor-pointer justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                    >
+                      Visualizar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="items-center px-4 py-3">
+        <button
+          (click)="closeModal()"
+          id="ok-btn"
+          class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        >
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

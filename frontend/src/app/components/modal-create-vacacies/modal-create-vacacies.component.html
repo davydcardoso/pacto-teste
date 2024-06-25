@@ -1,0 +1,182 @@
+<div
+  class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center"
+  *ngIf="isVisible"
+>
+  <div class="w-[700px] relative p-2 border shadow-lg rounded-md bg-white">
+    <form [formGroup]="vacanciesForm">
+      <div class="mt-3 text-center">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Cadastro e Edição de Vagas
+        </h3>
+        <div class="min-w-[400px] h-[500px] mt-2 px-7 py-3">
+          <div class="w-[100%] flex flex-col items-start mb-4">
+            <label for="title" class="block text-sm font-medium text-gray-700">
+              Titulo da vaga
+            </label>
+            <input
+              id="name"
+              type="text"
+              formControlName="title"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+            <div
+              *ngIf="
+                vacanciesForm.get('title')?.invalid &&
+                (vacanciesForm.get('title')?.dirty ||
+                  vacanciesForm.get('title')?.touched)
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              <div *ngIf="vacanciesForm.get('title')?.getError('required')">
+                Nome é um campo obrigatório
+              </div>
+            </div>
+          </div>
+          <div class="w-[100%] flex flex-col items-start mb-4">
+            <label
+              for="description"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Descrição
+            </label>
+            <textarea
+              id="email"
+              type="text"
+              rows="4"
+              formControlName="description"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            ></textarea>
+            <div
+              *ngIf="
+                vacanciesForm.get('description')?.invalid &&
+                (vacanciesForm.get('description')?.dirty ||
+                  vacanciesForm.get('description')?.touched)
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              <div
+                *ngIf="vacanciesForm.get('description')?.getError('required')"
+              >
+                Email é obrigatório
+              </div>
+            </div>
+          </div>
+          <div class="w-[100%] flex flex-col items-start mb-4">
+            <label
+              for="requirements"
+              class="block text-sm font-medium text-gray-700 mb-3"
+            >
+              Requisitos
+            </label>
+
+            <div class="flex items-baseline gap-2">
+              <input
+                id="requirementInput"
+                type="text"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+
+              <button
+                (click)="handleSetValueInRequirimentsForm()"
+                class="w-[130px] h-[30px] bg-blue-500 hover:bg-blue-400 ease-in-out duration-100 rounded-lg text-sm text-white flex items-center justify-center px-2 py-1"
+              >
+                Adicionar +
+              </button>
+            </div>
+
+            <div
+              class="w-[100%] max-h-[300px] overflow-auto grid grid-cols-6 mt-2"
+            >
+              <ng-container
+                *ngFor="
+                  let requirement of vacanciesForm.getRawValue().requirements
+                "
+              >
+                <div
+                  *ngIf="requirement !== ''"
+                  class="w-[100px] bg-blue-500 hover:bg-blue-400 ease-in-out duration-100 rounded-lg text-sm text-white flex items-center justify-between px-2 py-1"
+                >
+                  <span>
+                    {{ requirement }}
+                  </span>
+
+                  <div (click)="handleRemoveRequiriment(requirement)">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      x="0px"
+                      y="0px"
+                      width="15"
+                      height="15"
+                      viewBox="0,0,256,256"
+                    >
+                      <g
+                        fill="#ffffff"
+                        fill-rule="nonzero"
+                        stroke="none"
+                        stroke-width="1"
+                        stroke-linecap="butt"
+                        stroke-linejoin="miter"
+                        stroke-miterlimit="10"
+                        stroke-dasharray=""
+                        stroke-dashoffset="0"
+                        font-family="none"
+                        font-weight="none"
+                        font-size="none"
+                        text-anchor="none"
+                        style="mix-blend-mode: normal"
+                      >
+                        <g transform="scale(5.12,5.12)">
+                          <path
+                            d="M7.71875,6.28125l-1.4375,1.4375l17.28125,17.28125l-17.28125,17.28125l1.4375,1.4375l17.28125,-17.28125l17.28125,17.28125l1.4375,-1.4375l-17.28125,-17.28125l17.28125,-17.28125l-1.4375,-1.4375l-17.28125,17.28125z"
+                          ></path>
+                        </g>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </ng-container>
+              <div
+                *ngIf="
+                  vacanciesForm.get('requirements')?.invalid &&
+                  (vacanciesForm.get('requirements')?.dirty ||
+                    vacanciesForm.get('requirements')?.touched)
+                "
+                class="text-red-500 text-sm mt-1"
+              >
+                <div
+                  *ngIf="
+                    vacanciesForm.get('requirements')?.getError('required')
+                  "
+                >
+                  Email é obrigatório
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="error" class="text-red-500 text-sm mt-4">{{ error }}</div>
+        </div>
+        <div class="flex items-center justify-end gap-2">
+          <button
+            id="ok-btn"
+            type="button"
+            (click)="onCloseModal(!isVisible)"
+            class="w-[150px] px-4 py-2 bg-red-700 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            Fechar
+          </button>
+
+          <button
+            id="ok-btn"
+            type="submit"
+            (click)="handleCreateOrEditVacancy()"
+            class="w-[150px] hover:cursor-pointer px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            [disabled]="vacanciesForm.invalid"
+          >
+            Enviar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

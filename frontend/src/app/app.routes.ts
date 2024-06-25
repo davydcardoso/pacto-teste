@@ -1,10 +1,10 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { LoginComponent } from './presentation/login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { VacanciesComponent } from './presentation/vacancies/vacancies.component';
-import { NgModule } from '@angular/core';
 import { AdminComponent } from './presentation/admin/admin.component';
 import { RegisterComponent } from './presentation/register/register.component';
+import { VacanciesAdminComponent } from './presentation/vacancies-admin/vacancies-admin.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +23,11 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin/vacancies',
+    component: VacanciesAdminComponent,
     canActivate: [AuthGuard],
   },
   {

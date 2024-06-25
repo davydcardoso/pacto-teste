@@ -24,7 +24,13 @@ export class VacanciesWebRepository extends VacanciesRepository {
   createNewVacancies(
     data: CreateVacanciesRequestModule
   ): Observable<VacanciesModule> {
-    return {} as any;
+    return this.http
+      .post(`${this.apiUrl}/vacancies`, data, {
+        headers: {
+          Authorization: `Bearer ${this.authService.currentUserValue.token}`,
+        },
+      })
+      .pipe((result) => result as unknown as Observable<VacanciesModule>);
   }
   getAllVacancies(): Observable<VacanciesModule[]> {
     return this.http
@@ -42,7 +48,13 @@ export class VacanciesWebRepository extends VacanciesRepository {
     throw new Error('Method not implemented.');
   }
   deleteVacanciesById(id: string): Observable<void> {
-    throw new Error('Method not implemented.');
+    return this.http
+      .delete(`${this.apiUrl}/vacancies?id=${id}`, {
+        headers: {
+          Authorization: `Bearer ${this.authService.currentUserValue.token}`,
+        },
+      })
+      .pipe((result) => result as unknown as Observable<void>);
   }
   registerForVacancy(id: string): Observable<void> {
     return this.http
@@ -67,6 +79,12 @@ export class VacanciesWebRepository extends VacanciesRepository {
       .pipe((result) => result as Observable<VacanciesWithUsersModule[]>);
   }
   cancelApplicationForJobVacancy(id: string): Observable<void> {
-    throw new Error('Method not implemented.');
+    return this.http
+      .delete(`${this.apiUrl}/vacancies/subscriptions?id=${id}`, {
+        headers: {
+          Authorization: `Bearer ${this.authService.currentUserValue.token}`,
+        },
+      })
+      .pipe((result) => result as unknown as Observable<void>);
   }
 }

@@ -1,14 +1,23 @@
 <app-navmenu></app-navmenu>
-<app-modal-competitors
-  [isVisible]="isModalCompetitorsVisible"
-  [competitors]="selectedVacancy?.users"
-></app-modal-competitors>
-
 <app-left-admin-menu></app-left-admin-menu>
-<div class="w-full h-screen flex flex-col items-center p-5 gap-5">
+<app-modal-create-vacacies
+  [isVisible]="modalCreateVacanciesVisible"
+  [onCloseModal]="handleVisibilityModalCreateVacancies"
+></app-modal-create-vacacies>
 
+<div class="w-full h-screen flex flex-col items-center p-5 gap-5">
   <div class="w-[70%] h-[100%] flex flex-col gap-5 mt-[100px]">
-  <h1 class="font-bold text-3xl">Vagas com Aplicações</h1>
+    <div class="flex items-center justify-between">
+      <h1 class="font-bold text-3xl">Vagas Cadastradas</h1>
+
+      <button
+        (click)="handleVisibilityModalCreateVacancies()"
+        class="inline-flex hover:cursor-pointer justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+      >
+        Adicionar
+      </button>
+    </div>
+
     <div class="row">
       <div class="column">
         <table
@@ -18,38 +27,32 @@
             <tr>
               <th class="py-3 px-6 text-left">Titulo</th>
               <th class="py-3 px-6 text-left">Descrição</th>
-              <th class="py-3 px-6 text-center">Tecnologias</th>
+              <th class="py-3 px-6 text-left">Tecnologias</th>
               <th class="py-3 px-6 text-center">Ações</th>
             </tr>
           </thead>
 
           <tbody class="text-gray-700">
             <tr
-              *ngFor="let vacancy of vacanciesWithUsers"
+              *ngFor="let vacancy of vacancies"
               class="items-center justify-center border-b border-gray-200 hover:bg-gray-50"
             >
               <td class="py-4 px-6">{{ vacancy.title }}</td>
               <td class="py-4 px-6">{{ vacancy.descriptions }}</td>
               <td class="py-4 px-6">{{ vacancy.requirements }}</td>
-              <td class="py-4 px-6 flex flex-col gap-2">
+              <td class="py-4 px-6 flex gap-1">
                 <button
-                  (click)="handelOpenModalCompetitors(vacancy.id)"
-                  class="inline-flex hover:cursor-pointer justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                >
-                  Ver Candidatos
-                </button>
-
-                <!-- <button
                   class="inline-flex hover:cursor-pointer justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                 >
                   Editar
                 </button>
+
                 <button
-                  (click)="handleDeleteVacancies(vacancy.id)"
+                  (click)="handleDeleteVacancyById(vacancy.id)"
                   class="inline-flex hover:cursor-pointer justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                 >
                   Excluir
-                </button> -->
+                </button>
               </td>
             </tr>
           </tbody>

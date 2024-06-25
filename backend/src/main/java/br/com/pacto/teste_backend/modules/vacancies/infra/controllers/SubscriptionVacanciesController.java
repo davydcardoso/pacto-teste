@@ -2,19 +2,14 @@ package br.com.pacto.teste_backend.modules.vacancies.infra.controllers;
 
 
 import br.com.pacto.teste_backend.core.domain.FormatHttpExeptions;
-import br.com.pacto.teste_backend.modules.users.domain.entities.Users;
-import br.com.pacto.teste_backend.modules.users.infra.databases.repositories.UserRepository;
-import br.com.pacto.teste_backend.modules.users.service.TokenService;
 import br.com.pacto.teste_backend.modules.vacancies.usecases.ApplyForVacancyUseCase;
 import br.com.pacto.teste_backend.modules.vacancies.usecases.CancelApplicationForJobVacancyUseCase;
 import br.com.pacto.teste_backend.modules.vacancies.usecases.ConsultVacanciesAndCandidatesUseCase;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController

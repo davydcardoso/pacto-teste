@@ -1,4 +1,6 @@
-<div class="w-[100%] h-[60px] bg-primary flex items-center justify-center">
+<div
+  class="w-[100%] h-[60px] bg-primary flex items-center justify-center fixed top-0 z-20"
+>
   <div class="w-[80%] h-[100%] flex items-center justify-between">
     <h1 class="text-white uppercase font-bold text-2xl">PACTO</h1>
 
@@ -17,13 +19,16 @@
         <li class="hover:cursor-pointer">
           <a href="/vacacies" target="_self">Minhas Inscrições</a>
         </li>
-        <li class="hover:cursor-pointer">
+        <li
+          *ngIf="accessLevel === 'ADMINISTRATOR'"
+          class="hover:cursor-pointer"
+        >
           <a
             href="/admin"
             target="_self"
             class="w-[150px] h-[40px] border-solid border-white border-[0.5px] px-5 py-1 rounded-full hover:bg-[#fdfdfd53] ease-in-out duration-100"
           >
-            Admin
+            Administração
           </a>
         </li>
 
@@ -32,7 +37,7 @@
             (click)="handleLogOff()"
             class="w-[150px] h-[40px] border-solid border-white border-[0.5px] px-5 py-1 rounded-full hover:bg-[#fdfdfd53] ease-in-out duration-100"
           >
-            Encerrar
+            Sair
           </a>
         </li>
       </ul>

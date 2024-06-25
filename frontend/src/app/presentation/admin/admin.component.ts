@@ -5,14 +5,18 @@ import { NavmenuComponent } from '../../components/navmenu/navmenu.component';
 import { VacanciesWithUsersModule } from '../../core/domain/vacancies.module';
 import { GetVacanciesCompetitorsUseCase } from '../../core/usecases/get-vacancies-competitors.usecase';
 import { CommonModule } from '@angular/common';
+import { ModalCompetitorsComponent } from '../../components/modal-competitors/modal-competitors.component';
+import { LeftAdminMenuComponent } from "../../components/left-admin-menu/left-admin-menu.component";
 
 @Component({
-  selector: 'app-admin',
-  standalone: true,
-  templateUrl: './admin.component.html',
-  imports: [NavmenuComponent, CommonModule],
+    selector: 'app-admin',
+    standalone: true,
+    templateUrl: './admin.component.html',
+    imports: [NavmenuComponent, CommonModule, ModalCompetitorsComponent, LeftAdminMenuComponent]
 })
 export class AdminComponent implements OnInit {
+  public isModalCompetitorsVisible: boolean = false;
+  public selectedVacancy: VacanciesWithUsersModule | null = null;
   public vacanciesWithUsers: VacanciesWithUsersModule[];
 
   constructor(
@@ -31,8 +35,20 @@ export class AdminComponent implements OnInit {
     }
 
     this.getVacanciesCompetitors.perform().subscribe((result) => {
-      console.log(result);
       this.vacanciesWithUsers = result;
     });
+  }
+
+  handelOpenModalCompetitors(vacancyId: string) {
+    const selectedVacancy = this.vacanciesWithUsers.find(
+      (item) => item.id === vacancyId
+    );
+
+    if (!selectedVacancy) {
+      return;
+    }
+
+    this.selectedVacancy = selectedVacancy;
+    this.isModalCompetitorsVisible = !this.isModalCompetitorsVisible;
   }
 }

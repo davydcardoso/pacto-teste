@@ -14,6 +14,12 @@ public class GetAllVacanciesUseCase {
     private VacanciesRepository repository;
 
     public List<Vacancies> perform() {
-        return this.repository.findAll();
+        List<Vacancies> vacancies = this.repository.findAll();
+
+        for (Vacancies row : vacancies) {
+            row.getUsers().removeAll(row.getUsers());
+        }
+
+        return vacancies;
     }
 }
